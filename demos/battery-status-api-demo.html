@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
    <head>
@@ -49,6 +50,35 @@
             border: 1px solid #333333;
             line-height: 1.3em;
          }
+		 
+		 #batteryBody {
+    float: left;
+    width: 200px;
+    height: 75px;
+    border: 10px #CCC solid;
+}
+.container {
+    width: 240px;
+	height : 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+	border: 1px black solid;
+}
+#batteryEnd {
+    height: 50px;
+	background: green;
+}
+#indicator {
+    height: 100%;
+    width: 50%;
+}
+#indicator.charging {
+    background-color: #BFFF00;
+}
+#indicator.notCharging {
+    background-color: #FFFF00;
+}
 
          .button-demo
          {
@@ -81,9 +111,13 @@
             </ul>
          </div>
       </div>
+	  <div class="container">
+		<div id="batteryEnd"></div>
+	  </div>
 
       <h3>Log</h3>
       <div id="log"></div>
+	  
       <button id="clear-log" class="button-demo">Clear log</button>
 
       <small class="author">
@@ -99,6 +133,7 @@
             document.getElementById('bs-unsupported').classList.remove('hidden');
          } else {
             var log = document.getElementById('log');
+			var batteryIndicator = document.querySelector("#indicator");
 
             document.getElementById('bt-results').classList.remove('hidden');
 
@@ -107,6 +142,11 @@
                document.getElementById('charging-time').innerHTML = battery.chargingTime;
                document.getElementById('discharging-time').innerHTML = battery.dischargingTime;
                document.getElementById('battery-level').innerHTML = battery.level;
+			   document.getElementById('batteryEnd').style.width = battery.level*240+"px";
+			   
+			   
+			   
+			   
             }
 
             function addEvents(battery) {
